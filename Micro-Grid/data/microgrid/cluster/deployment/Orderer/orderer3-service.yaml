@@ -1,0 +1,28 @@
+# orderer service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orderer3-service
+  namespace: microgrid-cluster-orderer
+  labels:
+    namespace: microgrid-cluster-orderer
+    app: hlledger
+    role: orderer
+    orderer-name: orderer3
+spec:
+  selector:
+    namespace: microgrid-cluster-orderer
+    app: hlledger
+    role: orderer
+    orderer-name: orderer3
+  # clusterIP: None
+  ports:
+  - name: listen
+    protocol: TCP
+    port: 7050
+    targetPort: 7050
+  - name: monitor
+    protocol: TCP
+    port: 8443
+    targetPort: 8443

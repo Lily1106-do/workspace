@@ -1,0 +1,212 @@
+# namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: microgrid
+
+# hlledger auto pv 
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: microgrid
+  namespace: microgrid
+spec:
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: microgrid
+    name: microgrid
+  nfs:
+    server: "192.168.136.131"
+    path: "/opt/share"
+
+# yardman config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: yardman-config
+  namespace: microgrid
+data:
+  # nfs config
+  NFS_HOST: "192.168.136.131"
+  NFS_ROOT_DIR: "/opt/share"
+
+  # yardman name config
+  HL_YARDMAN_NAME: "microgrid"
+  # hlledger config
+  HLLEDGER_LOG_LEVEL: "info"
+  HLLEDGER_TLS_ENABLE: "true"
+  # couchdb or leveldb
+  PEER_DB_MODE: "leveldb"
+  # flask mode
+  FLASK_DEBUG: "0"
+  FLASK_APP: "index.py"
+  # ingress config "true" or "false"
+  INGRESS_ENABLE: "false"
+
+# kubernetes config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-config
+  namespace: microgrid
+data:
+  config: |
+    apiVersion: v1
+    clusters:
+    - cluster:
+        certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCakNDQWU2Z0F3SUJBZ0lCQVRBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwdGFXNXAKYTNWaVpVTkJNQjRYRFRJeE1EUXhOakEwTlRrMU5Wb1hEVE14TURReE5UQTBOVGsxTlZvd0ZURVRNQkVHQTFVRQpBeE1LYldsdWFXdDFZbVZEUVRDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTW9jCml0RzRBamRSVjBkbFdRWUR3NlV4RUI3M1ZHWjIzcDdVa3hvMVBjSkRaTzI3VlFpOGJpUkovN2NuWEtOMnhyejUKWm5VWDRmd0JEQ3g0ejBRbktlOThWcE9oTi9CSEIxZ2pldHd4bCtVOXFNVGQ0NXl6cExFaFdJamJJNHBIc1hyNgpKakFRUjliNnU4dWxEWklCMnhnd0JNcjgrdGovSDVGYm4zWU9GYkxaU1E4dXU0U3VNUjliT3pGNTRzU1ZCKy9lClRwSWxvc3BLOTUvVXc0UUxydUkrb1ZTV3FBWmJoelovVHlQTENhVFdhWDZPSUkwdkpWcURYb21Pa3hVUGx1ajAKeXJKM29jR0loei9zM1pFbXVqUWQvdVJBWjlhczVZd2JJaHJyckU3S0pkYkJwU3NoVVhHbWNnMUg2RmZIRk1JQwp1NnllOTdTVS9vNzlYUEd3YjhzQ0F3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trTUIwR0ExVWRKUVFXCk1CUUdDQ3NHQVFVRkJ3TUNCZ2dyQmdFRkJRY0RBVEFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQjBHQTFVZERnUVcKQkJSMHpHREtjR0d2L25MWkE0QXVvWnJNY0pDTU1EQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FRRUFIL0N0aHJJaApqWkZodERIZTI5TnVpV3d0bi8raDhONEZtSnpIanNwU25mQUNkTE5aTmF2TDFkWlp6K2MrRU1JRlAyMGdOZjlvCi9SMUE0amdBbjc4WW1rZFZFV2x0dXNCZXJJOHN4ZldtN2MwKzF0NFVVSmQ2ZWxNeTBHUEladTZBeE02aTRSZjQKcjg5eWdMclNablNzM2d6TGg4K1haR3hvNmtPbHJxQWJhRENId1BQdDFWcDJKREdLcm1KU1RwWlc3TlNjbHdiYQprdjJlOVJrSXhTYmtBNVMxcjVMVWhXZ0p6R2F5MW9EVkh4cmlja0FQcUo5am5QZ1QvVWdPM1pna1BuYXRvNERJCkUvbUZMWW1oRjUyRGVPaStqVU9pWkJrNnhpUm1lSGxkQ2RTQmpkeEo5U1djQkdrNEoySDlDVTR0Z29XbFVuODYKTkllYy84UmpZeVpZK2c9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+        extensions:
+        - extension:
+            last-update: Wed, 05 May 2021 16:03:08 CST
+            provider: minikube.sigs.k8s.io
+            version: v1.19.0
+          name: cluster_info
+        server: https://192.168.49.2:8443
+      name: minikube
+    contexts:
+    - context:
+        cluster: minikube
+        extensions:
+        - extension:
+            last-update: Wed, 05 May 2021 16:03:08 CST
+            provider: minikube.sigs.k8s.io
+            version: v1.19.0
+          name: context_info
+        namespace: default
+        user: minikube
+      name: minikube
+    current-context: minikube
+    kind: Config
+    preferences: {}
+    users:
+    - name: minikube
+      user:
+        client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJVENDQWdtZ0F3SUJBZ0lCQWpBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwdGFXNXAKYTNWaVpVTkJNQjRYRFRJeE1EVXdOREEzTVRRME5Gb1hEVEl5TURVd05UQTNNVFEwTkZvd01URVhNQlVHQTFVRQpDaE1PYzNsemRHVnRPbTFoYzNSbGNuTXhGakFVQmdOVkJBTVREVzFwYm1scmRXSmxMWFZ6WlhJd2dnRWlNQTBHCkNTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUtBb0lCQVFDMm5kOC80dnZjUi9abHp0T3Q5M01mcmlXaGtoQWUKb2hsV0hHL0hJS21yNkM5QTFhL1IyWEd5b3RZZ21hNDUwM3dXVzQ0d0ZpNS9CczRDM09WSEp3L081MXVVeFBMbAo5RUg4ZTBBK3orQXAxQkRhWVFnc0ZRMnRlVGF4ZUViREs0N096VEFvZFRaQ1BFNzlRMlBCLzhJMzFjWGNGVVlSCjBseURhaDFRZEZYSVJ5T29nWDJUMlpBVWdZRHppSWZpNVdlUVF3eWJjWEpMbFozZjh2SXFzSUg4eGIvWFNRTXcKUUVicWJrUmxKUUFwWHVwRGZCYkpib3JHL0V3MVBzUFRyNytadkxCcU4rb0REb2xMMm92UCtPK3NKdTFNSUF5OQo4TVEvYWZUUFRmdFgwRnFjdUtSY1N3Zm5LNHFRRmluTHFNcmFYME5TTHN5SHJONXF3TnNCOVNNSEFnTUJBQUdqCllEQmVNQTRHQTFVZER3RUIvd1FFQXdJRm9EQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUgKQXdJd0RBWURWUjBUQVFIL0JBSXdBREFmQmdOVkhTTUVHREFXZ0JSMHpHREtjR0d2L25MWkE0QXVvWnJNY0pDTQpNREFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBZENLNGwrOFB5S1Ewd3M2N0ZEWXlUVHkwZGt4aktXNHpaRzZCClU0ZEcrSnVTTXFkdFNpYW9lNTY2NC9iQjdGc3UrYnFJQlpBSzRIb1k4LzV3WThBMStEWnEvdmwzdStoK2JUNEYKZ0VVaFArR0ZLLzAveU5laDFoMDl4YndqQjJnNUxtOWptcmd6QjYyRzlrVzdJZlh4V1FpM241SGhXTWRTVXI4bAo0UWdWRy9jMG5RL2ZJQkNsQi9nWnpaS1pCY1dUR2xTRW5FWlJDY2VRSFR4THRybVVaajh3cFB4RHNrRThHRjJ0CmNMNW96SW5oV3AyaHl1WnVJZk9RT05XOVhkUThwNzRoRDAzR21WQUpMdDBnenFIUTVIbkRIQ25BL2hDNVUzbG4KcHRvcFpjL3hwUkY5ZExrb3REcjlBTWNpZEVwNmsxcUNCNmpDSjFWR0ZsY24wc1c3Snc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+        client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBdHAzZlArTDczRWYyWmM3VHJmZHpINjRsb1pJUUhxSVpWaHh2eHlDcHErZ3ZRTld2CjBkbHhzcUxXSUptdU9kTjhGbHVPTUJZdWZ3Yk9BdHpsUnljUHp1ZGJsTVR5NWZSQi9IdEFQcy9nS2RRUTJtRUkKTEJVTnJYazJzWGhHd3l1T3pzMHdLSFUyUWp4Ty9VTmp3Zi9DTjlYRjNCVkdFZEpjZzJvZFVIUlZ5RWNqcUlGOQprOW1RRklHQTg0aUg0dVZua0VNTW0zRnlTNVdkMy9MeUtyQ0IvTVcvMTBrRE1FQkc2bTVFWlNVQUtWN3FRM3dXCnlXNkt4dnhNTlQ3RDA2Ky9tYnl3YWpmcUF3NkpTOXFMei9qdnJDYnRUQ0FNdmZERVAybjB6MDM3VjlCYW5MaWsKWEVzSDV5dUtrQllweTZqSzJsOURVaTdNaDZ6ZWFzRGJBZlVqQndJREFRQUJBb0lCQUdxNkxhWEs1T1BDOHhCaApKbm0vNnZxUzdzOVU3RExiRGUrend1Z2dBTW5GY3doeldzUk1UeFRWOGtzdlJoSHB0ZFhqUUdCK05rSnJHYSsyCnBoRkZsUW1aVVg3SzlDTE05RnU1TkwwQkJNT3Rld1FHUFo1MTEzNlJIeFB0ZFgzUFVURXYzbnRtdFlWVWRkMnkKcXZUUW94TzZ6bDVuMklIRjdlZW45dVgwZDhZS1A5OWV2ZklsR3VLekMzRW5HbGRLeWRDejM4NGhvelFHTUQ3aQpjTmM1b0d1QkNrZTc1SW11OHVHcG5RZXY0MW5UZ0Y0MHlzR09qbzZVdzZYWGtkQVEzbm1qUTRnYU9sV2V0YjlKCmdOZnZkVGs2NkZzVHhNZWhhdXdCSEVXVEhQdjZjZWNacXdkNWtwdi9rbXVmcHVMeWZjNUdObzk4MFk0dHUwaEYKRjRxUEI3RUNnWUVBeGJBWFNSbndiS0hUSHV2b0NMaGJiNHVwNXlQOTlwRzlqVnhaaFZ2SFFOSnY2TVFkT3l5Vgpxb0ZIMm5iMnBNb3ozREFxei81d2lFYWU0OGdLaXdKNTdlcVRxWUZadGE5Tk9SL1RkTFMySVFpbHpteWNpYUFBCmFtQWxTN3RRZkxhcXFGWDlvL1p5dkNUbkxYbTBSM3hmS280TWt2cWRobnlVc0ZhMDg2L3JQdVVDZ1lFQTdIdTQKSFhPWUgvWGJQajVxbmE1dy9iUFkrUGRoblkrc2ZCMW1qT1J4WjRXN2J5YXpIL21YUUVxa2FTVjU0RVhZTThZTAp2dm95Z01OQ2wxNTNCWG1zOWFPbkV2K0FMTU1nTDZtUkFGaHhGMFhXZVhwTzFQOGdKanpRT21lSENyMWlFL1NNCjNwKy9xTDdsc1V0YmFTZ1NXTU9JcGN3UnBjbW05aGh0czN2Y2ozc0NnWUVBdFFRYkxsck1KZ3kvN3U2QTE0dEkKWG9sNm1DWUM1SVpyRlVmY3lScFRCMjRwL3Uray9JeEV0NDROcDJPTFVUVzk2djlJRkpDZHBvdFQ3cXM3ekRJRwpSKzZtSzI1QUlQZFdOTnFKbTdIbG03WDViVjFTc1VxTFZ0eVhDaE9KRGNtTjF2cDJlRzZ3Zk1zbHpDUkhDYlkrCnhnNndRTjJ1NUhpckJoVS9PR3g3Y21rQ2dZQjh0TUZpeHBKeVNEUlZucFNha21NRFp0UUVkbkFEcHNCT3N6SmgKR2hhemdOSld5eEdxeXZQMzgyVEFEZ00zUVozQnI2NkNCMjZhZUYybGRTdE90OXQ5cmM5dE5VOWlTNE90bnIzWQpjTXN5ZXFHZmJlQWtjbVdCeEpBS1BJMzZHK1Njb1Ztb0RKWUZacVc1MlFOYmNNWThDT0VHalpiQTFwWTFNS3lvCithaFdBUUtCZ1FDUWFQdExlVzNid25wVkR2WUFZdElJZVMyODRadkdUai9icVd4UmE1MzRjUG5FbXZrbmRWMkIKaDFpOUJKa1Qvck9jalR2VUp4OXlWcmx1VUFMWFJrWVd2Zk9qZXIyYXQ4ZXd3NWJPT21XQk0xMENzV2JRV2NPbQp0eXJmTHpXaW9YaEJxaHBmRGs2WEdyQzc4M3hqNFRBb2N3Z1JxVVRoSmpBa1N2R05JTFNJSkE9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+
+# hlledger auto pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: microgrid
+  namespace: microgrid
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 100Mi
+
+# dockerhub token
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: microgrid
+  name: dockerhub-token
+data:
+  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJyZWdpc3RyeS5jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20iOiB7CgkJCSJhdXRoIjogImRHbHRaV05vWVdsdVpYSTZWR2x0WldOb1lXbHVaWEpBTWpBeU1BPT0iCgkJfQoJfSwKCSJIdHRwSGVhZGVycyI6IHsKCQkiVXNlci1BZ2VudCI6ICJEb2NrZXItQ2xpZW50LzE5LjAzLjEzIChsaW51eCkiCgl9Cn0=
+type: kubernetes.io/dockerconfigjson
+
+# auto deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: microgrid
+  name: microgrid
+  labels:
+    app: yardman-app
+    role: yardman-role
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yardman-app
+      role: yardman-role
+  template:
+    metadata:
+      labels:
+        app: yardman-app
+        role: yardman-role
+    spec:
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: dockerhub-token
+      containers:
+      - name: yardman-mongo
+        image: registry.cn-hangzhou.aliyuncs.com/timechainer/mongo:4.4
+        volumeMounts:
+        - name: storage
+          mountPath: "/data/db"
+          subPath: "microgrid/yardman-mongo"
+      - name: yardman-api
+        image: registry.cn-hangzhou.aliyuncs.com/timechainer/yardman-api:0.1.0
+        workingDir: /opt/yardman
+        # ports:
+        # - containerPort: 50000
+        envFrom:
+        - configMapRef:
+            name: yardman-config
+        command:
+        - /bin/bash
+        - -c
+        - flask run -h 0.0.0.0 -p 50000
+        # - sleep 360000
+        volumeMounts:
+          - name: storage
+            mountPath: "/opt/yardman/data"
+          - name: storage
+            mountPath: "/opt/yardman/log"
+            subPath: "microgrid/yardman-log"
+          - name: kube
+            mountPath: "/root/.kube"
+            readOnly: true
+      - name: yardman-nginx
+        image: registry.cn-hangzhou.aliyuncs.com/timechainer/yardman-nginx:0.1.0
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: microgrid
+      - name: kube
+        configMap:
+          name: kube-config
+
+# hlledger service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: microgrid
+  name: yardman-service
+  labels:
+    app: yardman-app
+    role: yardman-role
+spec:
+  # clusterIP: None
+  type: NodePort
+  selector:
+    app: yardman-app
+    role: yardman-role
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort: 30000
+    - name: https
+      port: 443
+      targetPort: 443
+

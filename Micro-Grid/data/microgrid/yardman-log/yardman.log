@@ -1,0 +1,328 @@
+[32m2021-05-05 16:43:27,274 INFO deployment.py lineno:16 Thread-2: Generate org name:Consumer namespace deployment...[0m
+[32m2021-05-05 16:43:27,293 INFO deployment.py lineno:25 Thread-2: Generate org name:Consumer namespace deployment done.[0m
+[32m2021-05-05 16:43:29,429 INFO deployment.py lineno:29 Thread-2: Generate ca deployment...[0m
+[32m2021-05-05 16:43:29,443 INFO deployment.py lineno:44 Thread-2: data/microgrid/cluster/hlledger/Consumer/rootca-consumer[0m
+[32m2021-05-05 16:43:29,483 INFO deployment.py lineno:64 Thread-2: Generate ca deployment done[0m
+[32m2021-05-05 16:44:11,595 INFO detect_service.py lineno:35 Thread-2: ip:rootca-consumer.microgrid-cluster-consumer port:7054 result:0[0m
+[32m2021-05-05 16:44:11,598 INFO control.py lineno:35 Thread-2: 10.96.129.233[0m
+[32m2021-05-05 16:44:11,609 INFO certs.py lineno:45 Thread-2: Generate peer org certs...[0m
+[32m2021-05-05 16:44:11,621 INFO excute_command.py lineno:46 Thread-2: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'enroll_ca_admin', 'cluster', 'consumer.cluster.microgrid', 'admin:adminpw', 'rootca-consumer.microgrid-cluster-consumer:7054', 'rootca-consumer'][0m
+[32m2021-05-05 16:44:12,325 INFO excute_command.py lineno:49 Thread-2: stdout:
+[0m
+[32m2021-05-05 16:44:12,332 INFO excute_command.py lineno:46 Thread-2: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'register_admin_user', 'cluster', 'consumer.cluster.microgrid', 'admin:adminpw', 'rootca-consumer.microgrid-cluster-consumer:7054', 'rootca-consumer'][0m
+[32m2021-05-05 16:44:12,497 INFO excute_command.py lineno:49 Thread-2: stdout:
+Password: orgAdminpw
+[0m
+[32m2021-05-05 16:44:12,497 INFO excute_command.py lineno:46 Thread-2: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'enroll_admin_user', 'cluster', 'consumer.cluster.microgrid', 'admin:adminpw', 'rootca-consumer.microgrid-cluster-consumer:7054', 'rootca-consumer'][0m
+[32m2021-05-05 16:44:12,944 INFO excute_command.py lineno:49 Thread-2: stdout:
+[0m
+[32m2021-05-05 16:44:12,945 INFO certs.py lineno:67 Thread-2: Generate peer org certs done.[0m
+[32m2021-05-05 16:44:18,067 INFO kubernetes_cluster.py lineno:206 Thread-3: {'name': 'Consumer', 'msp_id': 'ConsumerMSP', 'desc': 'org_Consumer', 'create_time': datetime.datetime(2021, 5, 5, 16, 43, 27, 270000), 'type': 'peer', 'domain': 'consumer.cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-consumer', 'port1': 7054, 'url': 'rootca-consumer.microgrid-cluster-consumer:7054', 'ip': '10.96.129.233'}]}, 'namespace': 'microgrid-cluster-consumer'}[0m
+[32m2021-05-05 16:44:18,069 INFO kubernetes_cluster.py lineno:152 Thread-3: cluster:cluster, org name:Consumer, node status:-1[0m
+[32m2021-05-05 16:44:18,074 INFO create_peer_node.py lineno:13 Thread-3: {'name': 'Consumer', 'msp_id': 'ConsumerMSP', 'desc': 'org_Consumer', 'create_time': datetime.datetime(2021, 5, 5, 16, 43, 27, 270000), 'type': 'peer', 'domain': 'consumer.cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-consumer', 'port1': 7054, 'url': 'rootca-consumer.microgrid-cluster-consumer:7054', 'ip': '10.96.129.233'}]}, 'namespace': 'microgrid-cluster-consumer'}[0m
+[32m2021-05-05 16:44:18,077 INFO certs.py lineno:70 Thread-3: Generate peer node certs...[0m
+[32m2021-05-05 16:44:18,077 INFO excute_command.py lineno:46 Thread-3: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'register_peer', 'cluster', 'consumer.cluster.microgrid', 'admin:adminpw', 'rootca-consumer.microgrid-cluster-consumer:7054', 'rootca-consumer', 'consumer1'][0m
+[32m2021-05-05 16:44:18,261 INFO excute_command.py lineno:49 Thread-3: stdout:
+Password: peerpw
+[0m
+[32m2021-05-05 16:44:18,261 INFO excute_command.py lineno:46 Thread-3: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'enroll_peer', 'cluster', 'consumer.cluster.microgrid', 'admin:adminpw', 'rootca-consumer.microgrid-cluster-consumer:7054', 'rootca-consumer', 'consumer1'][0m
+[32m2021-05-05 16:44:18,714 INFO excute_command.py lineno:49 Thread-3: stdout:
+[0m
+[32m2021-05-05 16:44:18,715 INFO certs.py lineno:78 Thread-3: Generate peer node certs done.[0m
+[32m2021-05-05 16:44:19,611 INFO config.py lineno:120 Thread-3: Copy config to data...[0m
+[32m2021-05-05 16:44:19,723 INFO config.py lineno:131 Thread-3: Copy config to data done.[0m
+[32m2021-05-05 16:44:19,726 INFO deployment.py lineno:139 Thread-3: Generate peer deployment...[0m
+[32m2021-05-05 16:44:19,746 INFO deployment.py lineno:173 Thread-3: Generate peer deployment done.[0m
+[32m2021-05-05 16:44:46,691 INFO detect_service.py lineno:35 Thread-3: ip:10.100.234.18 port:7051 result:0[0m
+[32m2021-05-05 16:44:51,753 INFO kubernetes_cluster.py lineno:206 Thread-4: {'name': 'Consumer', 'msp_id': 'ConsumerMSP', 'desc': 'org_Consumer', 'create_time': datetime.datetime(2021, 5, 5, 16, 43, 27, 270000), 'type': 'peer', 'domain': 'consumer.cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-consumer', 'port1': 7054, 'url': 'rootca-consumer.microgrid-cluster-consumer:7054', 'ip': '10.96.129.233'}]}, 'namespace': 'microgrid-cluster-consumer'}[0m
+[32m2021-05-05 16:44:51,756 INFO kubernetes_cluster.py lineno:152 Thread-4: cluster:cluster, org name:Consumer, node status:-1[0m
+[32m2021-05-05 16:44:51,765 INFO create_peer_node.py lineno:13 Thread-4: {'name': 'Consumer', 'msp_id': 'ConsumerMSP', 'desc': 'org_Consumer', 'create_time': datetime.datetime(2021, 5, 5, 16, 43, 27, 270000), 'type': 'peer', 'domain': 'consumer.cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-consumer', 'port1': 7054, 'url': 'rootca-consumer.microgrid-cluster-consumer:7054', 'ip': '10.96.129.233'}]}, 'namespace': 'microgrid-cluster-consumer'}[0m
+[32m2021-05-05 16:44:51,770 INFO certs.py lineno:70 Thread-4: Generate peer node certs...[0m
+[32m2021-05-05 16:44:51,771 INFO excute_command.py lineno:46 Thread-4: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'register_peer', 'cluster', 'consumer.cluster.microgrid', 'admin:adminpw', 'rootca-consumer.microgrid-cluster-consumer:7054', 'rootca-consumer', 'consumer2'][0m
+[32m2021-05-05 16:44:51,982 INFO excute_command.py lineno:49 Thread-4: stdout:
+Password: peerpw
+[0m
+[32m2021-05-05 16:44:51,982 INFO excute_command.py lineno:46 Thread-4: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'enroll_peer', 'cluster', 'consumer.cluster.microgrid', 'admin:adminpw', 'rootca-consumer.microgrid-cluster-consumer:7054', 'rootca-consumer', 'consumer2'][0m
+[32m2021-05-05 16:44:52,388 INFO excute_command.py lineno:49 Thread-4: stdout:
+[0m
+[32m2021-05-05 16:44:52,389 INFO certs.py lineno:78 Thread-4: Generate peer node certs done.[0m
+[32m2021-05-05 16:44:53,040 INFO config.py lineno:120 Thread-4: Copy config to data...[0m
+[32m2021-05-05 16:44:53,100 INFO config.py lineno:131 Thread-4: Copy config to data done.[0m
+[32m2021-05-05 16:44:53,101 INFO deployment.py lineno:139 Thread-4: Generate peer deployment...[0m
+[32m2021-05-05 16:44:53,108 INFO deployment.py lineno:173 Thread-4: Generate peer deployment done.[0m
+[32m2021-05-05 16:45:03,702 INFO detect_service.py lineno:35 Thread-4: ip:10.100.2.42 port:7051 result:0[0m
+[32m2021-05-05 16:45:13,798 INFO deployment.py lineno:16 Thread-5: Generate org name:Producer namespace deployment...[0m
+[32m2021-05-05 16:45:13,816 INFO deployment.py lineno:25 Thread-5: Generate org name:Producer namespace deployment done.[0m
+[32m2021-05-05 16:45:14,060 INFO deployment.py lineno:29 Thread-5: Generate ca deployment...[0m
+[32m2021-05-05 16:45:14,064 INFO deployment.py lineno:44 Thread-5: data/microgrid/cluster/hlledger/Producer/rootca-producer[0m
+[32m2021-05-05 16:45:14,076 INFO deployment.py lineno:64 Thread-5: Generate ca deployment done[0m
+[32m2021-05-05 16:45:23,424 INFO detect_service.py lineno:35 Thread-5: ip:rootca-producer.microgrid-cluster-producer port:7054 result:0[0m
+[32m2021-05-05 16:45:23,439 INFO control.py lineno:35 Thread-5: 10.108.30.165[0m
+[32m2021-05-05 16:45:23,450 INFO certs.py lineno:45 Thread-5: Generate peer org certs...[0m
+[32m2021-05-05 16:45:23,474 INFO excute_command.py lineno:46 Thread-5: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'enroll_ca_admin', 'cluster', 'producer.cluster.microgrid', 'admin:adminpw', 'rootca-producer.microgrid-cluster-producer:7054', 'rootca-producer'][0m
+[32m2021-05-05 16:45:23,745 INFO excute_command.py lineno:49 Thread-5: stdout:
+[0m
+[32m2021-05-05 16:45:23,746 INFO excute_command.py lineno:46 Thread-5: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'register_admin_user', 'cluster', 'producer.cluster.microgrid', 'admin:adminpw', 'rootca-producer.microgrid-cluster-producer:7054', 'rootca-producer'][0m
+[32m2021-05-05 16:45:23,937 INFO excute_command.py lineno:49 Thread-5: stdout:
+Password: orgAdminpw
+[0m
+[32m2021-05-05 16:45:23,938 INFO excute_command.py lineno:46 Thread-5: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'enroll_admin_user', 'cluster', 'producer.cluster.microgrid', 'admin:adminpw', 'rootca-producer.microgrid-cluster-producer:7054', 'rootca-producer'][0m
+[32m2021-05-05 16:45:24,338 INFO excute_command.py lineno:49 Thread-5: stdout:
+[0m
+[32m2021-05-05 16:45:24,339 INFO certs.py lineno:67 Thread-5: Generate peer org certs done.[0m
+[32m2021-05-05 16:45:29,383 INFO kubernetes_cluster.py lineno:206 Thread-6: {'name': 'Producer', 'msp_id': 'ProducerMSP', 'desc': 'org_Producer', 'create_time': datetime.datetime(2021, 5, 5, 16, 45, 13, 788000), 'type': 'peer', 'domain': 'producer.cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-producer', 'port1': 7054, 'url': 'rootca-producer.microgrid-cluster-producer:7054', 'ip': '10.108.30.165'}]}, 'namespace': 'microgrid-cluster-producer'}[0m
+[32m2021-05-05 16:45:29,385 INFO kubernetes_cluster.py lineno:152 Thread-6: cluster:cluster, org name:Producer, node status:-1[0m
+[32m2021-05-05 16:45:29,389 INFO create_peer_node.py lineno:13 Thread-6: {'name': 'Producer', 'msp_id': 'ProducerMSP', 'desc': 'org_Producer', 'create_time': datetime.datetime(2021, 5, 5, 16, 45, 13, 788000), 'type': 'peer', 'domain': 'producer.cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-producer', 'port1': 7054, 'url': 'rootca-producer.microgrid-cluster-producer:7054', 'ip': '10.108.30.165'}]}, 'namespace': 'microgrid-cluster-producer'}[0m
+[32m2021-05-05 16:45:29,391 INFO certs.py lineno:70 Thread-6: Generate peer node certs...[0m
+[32m2021-05-05 16:45:29,391 INFO excute_command.py lineno:46 Thread-6: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'register_peer', 'cluster', 'producer.cluster.microgrid', 'admin:adminpw', 'rootca-producer.microgrid-cluster-producer:7054', 'rootca-producer', 'producer1'][0m
+[32m2021-05-05 16:45:29,574 INFO excute_command.py lineno:49 Thread-6: stdout:
+Password: peerpw
+[0m
+[32m2021-05-05 16:45:29,575 INFO excute_command.py lineno:46 Thread-6: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'enroll_peer', 'cluster', 'producer.cluster.microgrid', 'admin:adminpw', 'rootca-producer.microgrid-cluster-producer:7054', 'rootca-producer', 'producer1'][0m
+[32m2021-05-05 16:45:30,041 INFO excute_command.py lineno:49 Thread-6: stdout:
+[0m
+[32m2021-05-05 16:45:30,042 INFO certs.py lineno:78 Thread-6: Generate peer node certs done.[0m
+[32m2021-05-05 16:45:30,649 INFO config.py lineno:120 Thread-6: Copy config to data...[0m
+[32m2021-05-05 16:45:30,712 INFO config.py lineno:131 Thread-6: Copy config to data done.[0m
+[32m2021-05-05 16:45:30,713 INFO deployment.py lineno:139 Thread-6: Generate peer deployment...[0m
+[32m2021-05-05 16:45:30,721 INFO deployment.py lineno:173 Thread-6: Generate peer deployment done.[0m
+[32m2021-05-05 16:45:40,108 INFO detect_service.py lineno:35 Thread-6: ip:10.108.190.212 port:7051 result:0[0m
+[32m2021-05-05 16:45:45,155 INFO kubernetes_cluster.py lineno:206 Thread-7: {'name': 'Producer', 'msp_id': 'ProducerMSP', 'desc': 'org_Producer', 'create_time': datetime.datetime(2021, 5, 5, 16, 45, 13, 788000), 'type': 'peer', 'domain': 'producer.cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-producer', 'port1': 7054, 'url': 'rootca-producer.microgrid-cluster-producer:7054', 'ip': '10.108.30.165'}]}, 'namespace': 'microgrid-cluster-producer'}[0m
+[32m2021-05-05 16:45:45,159 INFO kubernetes_cluster.py lineno:152 Thread-7: cluster:cluster, org name:Producer, node status:-1[0m
+[32m2021-05-05 16:45:45,166 INFO create_peer_node.py lineno:13 Thread-7: {'name': 'Producer', 'msp_id': 'ProducerMSP', 'desc': 'org_Producer', 'create_time': datetime.datetime(2021, 5, 5, 16, 45, 13, 788000), 'type': 'peer', 'domain': 'producer.cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-producer', 'port1': 7054, 'url': 'rootca-producer.microgrid-cluster-producer:7054', 'ip': '10.108.30.165'}]}, 'namespace': 'microgrid-cluster-producer'}[0m
+[32m2021-05-05 16:45:45,171 INFO certs.py lineno:70 Thread-7: Generate peer node certs...[0m
+[32m2021-05-05 16:45:45,171 INFO excute_command.py lineno:46 Thread-7: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'register_peer', 'cluster', 'producer.cluster.microgrid', 'admin:adminpw', 'rootca-producer.microgrid-cluster-producer:7054', 'rootca-producer', 'producer2'][0m
+[32m2021-05-05 16:45:45,392 INFO excute_command.py lineno:49 Thread-7: stdout:
+Password: peerpw
+[0m
+[32m2021-05-05 16:45:45,392 INFO excute_command.py lineno:46 Thread-7: ['bash', 'conduit/scripts/generate-peer-certs.sh', 'enroll_peer', 'cluster', 'producer.cluster.microgrid', 'admin:adminpw', 'rootca-producer.microgrid-cluster-producer:7054', 'rootca-producer', 'producer2'][0m
+[32m2021-05-05 16:45:45,797 INFO excute_command.py lineno:49 Thread-7: stdout:
+[0m
+[32m2021-05-05 16:45:45,797 INFO certs.py lineno:78 Thread-7: Generate peer node certs done.[0m
+[32m2021-05-05 16:45:46,518 INFO config.py lineno:120 Thread-7: Copy config to data...[0m
+[32m2021-05-05 16:45:46,750 INFO config.py lineno:131 Thread-7: Copy config to data done.[0m
+[32m2021-05-05 16:45:46,751 INFO deployment.py lineno:139 Thread-7: Generate peer deployment...[0m
+[32m2021-05-05 16:45:46,759 INFO deployment.py lineno:173 Thread-7: Generate peer deployment done.[0m
+[32m2021-05-05 16:45:54,346 INFO detect_service.py lineno:35 Thread-7: ip:10.103.6.188 port:7051 result:0[0m
+[32m2021-05-05 16:46:04,398 INFO deployment.py lineno:16 Thread-8: Generate org name:Orderer namespace deployment...[0m
+[32m2021-05-05 16:46:04,406 INFO deployment.py lineno:25 Thread-8: Generate org name:Orderer namespace deployment done.[0m
+[32m2021-05-05 16:46:05,105 INFO deployment.py lineno:29 Thread-8: Generate ca deployment...[0m
+[32m2021-05-05 16:46:05,109 INFO deployment.py lineno:44 Thread-8: data/microgrid/cluster/hlledger/Orderer/rootca-orderer[0m
+[32m2021-05-05 16:46:05,122 INFO deployment.py lineno:64 Thread-8: Generate ca deployment done[0m
+[32m2021-05-05 16:46:14,408 INFO detect_service.py lineno:35 Thread-8: ip:rootca-orderer.microgrid-cluster-orderer port:7054 result:0[0m
+[32m2021-05-05 16:46:14,412 INFO control.py lineno:35 Thread-8: 10.107.81.87[0m
+[32m2021-05-05 16:46:14,415 INFO certs.py lineno:9 Thread-8: Generate orderer org certs...[0m
+[32m2021-05-05 16:46:14,424 INFO excute_command.py lineno:46 Thread-8: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'enroll_ca_admin', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer'][0m
+[32m2021-05-05 16:46:14,638 INFO excute_command.py lineno:49 Thread-8: stdout:
+[0m
+[32m2021-05-05 16:46:14,639 INFO excute_command.py lineno:46 Thread-8: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'register_admin_user', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer'][0m
+[32m2021-05-05 16:46:14,814 INFO excute_command.py lineno:49 Thread-8: stdout:
+Password: ordererAdminpw
+[0m
+[32m2021-05-05 16:46:14,814 INFO excute_command.py lineno:46 Thread-8: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'enroll_admin_user', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer'][0m
+[32m2021-05-05 16:46:15,204 INFO excute_command.py lineno:49 Thread-8: stdout:
+[0m
+[32m2021-05-05 16:46:15,204 INFO certs.py lineno:31 Thread-8: Generate orderer org certs done.[0m
+[32m2021-05-05 16:46:20,260 INFO kubernetes_cluster.py lineno:206 Thread-9: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 16:46:20,263 INFO kubernetes_cluster.py lineno:115 Thread-9: cluster:cluster, org name:Orderer, node status:-1[0m
+[32m2021-05-05 16:46:20,271 INFO create_orderer_node.py lineno:14 Thread-9: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 16:46:20,278 INFO certs.py lineno:34 Thread-9: Generate orderer node certs...[0m
+[32m2021-05-05 16:46:20,279 INFO excute_command.py lineno:46 Thread-9: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'register_orderer', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer', 'orderer1'][0m
+[32m2021-05-05 16:46:20,496 INFO excute_command.py lineno:49 Thread-9: stdout:
+Password: ordererpw
+[0m
+[32m2021-05-05 16:46:20,497 INFO excute_command.py lineno:46 Thread-9: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'enroll_orderer', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer', 'orderer1'][0m
+[32m2021-05-05 16:46:20,970 INFO excute_command.py lineno:49 Thread-9: stdout:
+[0m
+[32m2021-05-05 16:46:20,970 INFO certs.py lineno:42 Thread-9: Generate orderer node certs done.[0m
+[32m2021-05-05 16:46:26,433 INFO kubernetes_cluster.py lineno:206 Thread-10: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 16:46:26,438 INFO kubernetes_cluster.py lineno:115 Thread-10: cluster:cluster, org name:Orderer, node status:-1[0m
+[32m2021-05-05 16:46:26,446 INFO create_orderer_node.py lineno:14 Thread-10: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 16:46:26,452 INFO certs.py lineno:34 Thread-10: Generate orderer node certs...[0m
+[32m2021-05-05 16:46:26,453 INFO excute_command.py lineno:46 Thread-10: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'register_orderer', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer', 'orderer2'][0m
+[32m2021-05-05 16:46:26,704 INFO excute_command.py lineno:49 Thread-10: stdout:
+Password: ordererpw
+[0m
+[32m2021-05-05 16:46:26,704 INFO excute_command.py lineno:46 Thread-10: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'enroll_orderer', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer', 'orderer2'][0m
+[32m2021-05-05 16:46:27,121 INFO excute_command.py lineno:49 Thread-10: stdout:
+[0m
+[32m2021-05-05 16:46:27,121 INFO certs.py lineno:42 Thread-10: Generate orderer node certs done.[0m
+[32m2021-05-05 16:46:32,373 INFO kubernetes_cluster.py lineno:206 Thread-11: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 16:46:32,374 INFO kubernetes_cluster.py lineno:115 Thread-11: cluster:cluster, org name:Orderer, node status:-1[0m
+[32m2021-05-05 16:46:32,376 INFO create_orderer_node.py lineno:14 Thread-11: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 16:46:32,377 INFO certs.py lineno:34 Thread-11: Generate orderer node certs...[0m
+[32m2021-05-05 16:46:32,377 INFO excute_command.py lineno:46 Thread-11: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'register_orderer', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer', 'orderer3'][0m
+[32m2021-05-05 16:46:32,543 INFO excute_command.py lineno:49 Thread-11: stdout:
+Password: ordererpw
+[0m
+[32m2021-05-05 16:46:32,543 INFO excute_command.py lineno:46 Thread-11: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'enroll_orderer', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer', 'orderer3'][0m
+[32m2021-05-05 16:46:32,985 INFO excute_command.py lineno:49 Thread-11: stdout:
+[0m
+[32m2021-05-05 16:46:32,986 INFO certs.py lineno:42 Thread-11: Generate orderer node certs done.[0m
+[32m2021-05-05 16:46:38,268 INFO kubernetes_cluster.py lineno:206 Thread-12: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 16:46:38,269 INFO kubernetes_cluster.py lineno:115 Thread-12: cluster:cluster, org name:Orderer, node status:-1[0m
+[32m2021-05-05 16:46:38,273 INFO create_orderer_node.py lineno:14 Thread-12: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 16:46:38,276 INFO certs.py lineno:34 Thread-12: Generate orderer node certs...[0m
+[32m2021-05-05 16:46:38,276 INFO excute_command.py lineno:46 Thread-12: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'register_orderer', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer', 'orderer4'][0m
+[32m2021-05-05 16:46:38,504 INFO excute_command.py lineno:49 Thread-12: stdout:
+Password: ordererpw
+[0m
+[32m2021-05-05 16:46:38,505 INFO excute_command.py lineno:46 Thread-12: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'enroll_orderer', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer', 'orderer4'][0m
+[32m2021-05-05 16:46:38,895 INFO excute_command.py lineno:49 Thread-12: stdout:
+[0m
+[32m2021-05-05 16:46:38,895 INFO certs.py lineno:42 Thread-12: Generate orderer node certs done.[0m
+[32m2021-05-05 16:46:44,157 INFO kubernetes_cluster.py lineno:206 Thread-13: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 16:46:44,159 INFO kubernetes_cluster.py lineno:115 Thread-13: cluster:cluster, org name:Orderer, node status:-1[0m
+[32m2021-05-05 16:46:44,164 INFO create_orderer_node.py lineno:14 Thread-13: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 16:46:44,167 INFO certs.py lineno:34 Thread-13: Generate orderer node certs...[0m
+[32m2021-05-05 16:46:44,168 INFO excute_command.py lineno:46 Thread-13: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'register_orderer', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer', 'orderer5'][0m
+[32m2021-05-05 16:46:44,321 INFO excute_command.py lineno:49 Thread-13: stdout:
+Password: ordererpw
+[0m
+[32m2021-05-05 16:46:44,321 INFO excute_command.py lineno:46 Thread-13: ['bash', 'conduit/scripts/generate-orderer-certs.sh', 'enroll_orderer', 'cluster', 'cluster.microgrid', 'admin:adminpw', 'rootca-orderer.microgrid-cluster-orderer:7054', 'rootca-orderer', 'orderer5'][0m
+[32m2021-05-05 16:46:44,771 INFO excute_command.py lineno:49 Thread-13: stdout:
+[0m
+[32m2021-05-05 16:46:44,772 INFO certs.py lineno:42 Thread-13: Generate orderer node certs done.[0m
+[31m2021-05-05 16:47:01,077 ERROR parameter_verify.py lineno:47 Thread-14: This org name: is not according to naming rules.[0m
+[31m2021-05-05 16:47:06,101 ERROR kubernetes_cluster.py lineno:279 Thread-15: cluster: the cluster is not created.[0m
+[31m2021-05-05 16:47:11,142 ERROR kubernetes_cluster.py lineno:326 Thread-16: conandpro:the channel is not created.[0m
+[31m2021-05-05 16:47:16,167 ERROR kubernetes_cluster.py lineno:326 Thread-17: conandpro:the channel is not created.[0m
+[31m2021-05-05 16:47:21,209 ERROR kubernetes_cluster.py lineno:326 Thread-18: conandpro:the channel is not created.[0m
+[31m2021-05-05 16:47:26,231 ERROR kubernetes_cluster.py lineno:326 Thread-19: conandpro:the channel is not created.[0m
+[31m2021-05-05 16:47:31,261 ERROR kubernetes_cluster.py lineno:434 Thread-20: channel:conandpro the org:Consumer is not joined.[0m
+[31m2021-05-05 16:47:36,302 ERROR kubernetes_cluster.py lineno:434 Thread-21: channel:conandpro the org:Producer is not joined.[0m
+[31m2021-05-05 16:49:36,164 ERROR parameter_verify.py lineno:47 Thread-22: This org name: is not according to naming rules.[0m
+[31m2021-05-05 16:49:41,191 ERROR parameter_verify.py lineno:47 Thread-23: This org name: is not according to naming rules.[0m
+[31m2021-05-05 16:51:07,768 ERROR parameter_verify.py lineno:47 Thread-24: This org name: is not according to naming rules.[0m
+[31m2021-05-05 16:51:12,801 ERROR parameter_verify.py lineno:47 Thread-25: This org name: is not according to naming rules.[0m
+[31m2021-05-05 16:52:10,837 ERROR parameter_verify.py lineno:47 Thread-27: This org name: is not according to naming rules.[0m
+[31m2021-05-05 16:52:15,882 ERROR parameter_verify.py lineno:47 Thread-28: This org name: is not according to naming rules.[0m
+[32m2021-05-05 17:19:19,337 INFO kubernetes_cluster.py lineno:206 Thread-33: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 17:19:19,339 INFO kubernetes_cluster.py lineno:115 Thread-33: cluster:cluster, org name:Orderer, node status:2[0m
+[32m2021-05-05 17:19:24,383 INFO kubernetes_cluster.py lineno:206 Thread-34: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 17:19:24,384 INFO kubernetes_cluster.py lineno:115 Thread-34: cluster:cluster, org name:Orderer, node status:2[0m
+[32m2021-05-05 17:19:29,442 INFO kubernetes_cluster.py lineno:206 Thread-35: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 17:19:29,444 INFO kubernetes_cluster.py lineno:115 Thread-35: cluster:cluster, org name:Orderer, node status:2[0m
+[32m2021-05-05 17:19:34,468 INFO kubernetes_cluster.py lineno:206 Thread-36: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 17:19:34,469 INFO kubernetes_cluster.py lineno:115 Thread-36: cluster:cluster, org name:Orderer, node status:2[0m
+[32m2021-05-05 17:19:39,510 INFO kubernetes_cluster.py lineno:206 Thread-37: {'name': 'Orderer', 'msp_id': 'OrdererMSP', 'desc': 'org_Orderer', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 4, 396000), 'type': 'orderer', 'domain': 'cluster.microgrid', 'ca': {'type': 1, 'root_ca': [{'name': 'rootca-orderer', 'port1': 7054, 'url': 'rootca-orderer.microgrid-cluster-orderer:7054', 'ip': '10.107.81.87'}]}, 'namespace': 'microgrid-cluster-orderer'}[0m
+[32m2021-05-05 17:19:39,512 INFO kubernetes_cluster.py lineno:115 Thread-37: cluster:cluster, org name:Orderer, node status:2[0m
+[31m2021-05-05 17:19:54,532 ERROR parameter_verify.py lineno:47 Thread-38: This org name: is not according to naming rules.[0m
+[31m2021-05-05 17:19:59,557 ERROR parameter_verify.py lineno:47 Thread-39: This org name: is not according to naming rules.[0m
+[32m2021-05-05 17:21:04,966 INFO config.py lineno:12 Thread-40: ['Consumer', 'Producer'][0m
+[32m2021-05-05 17:21:04,983 INFO models.py lineno:73 Thread-40: {'name': 'cluster', 'domain': 'cluster.microgrid', 'desc': 'desc', 'consensus': 'raft'}[0m
+[32m2021-05-05 17:21:05,168 INFO config.py lineno:69 Thread-40: Generate configtx.yaml for systemchannel done.[0m
+[32m2021-05-05 17:21:05,169 INFO config.py lineno:105 Thread-40: Generate genesis block...[0m
+[32m2021-05-05 17:21:05,169 INFO excute_command.py lineno:46 Thread-40: ['bash', 'conduit/scripts/generate-genesis-block.sh', 'cluster', 'systemchannel'][0m
+[32m2021-05-05 17:21:06,195 INFO excute_command.py lineno:49 Thread-40: stdout:
+##########################################################
+#########  Generating Orderer Genesis block ##############
+##########################################################
+[0m
+[32m2021-05-05 17:21:06,196 INFO config.py lineno:109 Thread-40: Generate genesis block done.[0m
+[32m2021-05-05 17:21:06,200 INFO config.py lineno:135 Thread-40: Copy config to data...[0m
+[32m2021-05-05 17:21:06,212 INFO config.py lineno:149 Thread-40: {'name': 'orderer1', 'desc': 'node_orderer1', 'domain': 'orderer1.cluster.microgrid', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 20, 272000), 'port1': 7050, 'port2': 8443, 'url1': 'orderer1.cluster.microgrid:7050', 'url2': 'orderer1.cluster.microgrid:8443', 'ip': '10.105.16.133'}[0m
+[32m2021-05-05 17:21:06,430 INFO config.py lineno:149 Thread-40: {'name': 'orderer2', 'desc': 'node_orderer2', 'domain': 'orderer2.cluster.microgrid', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 26, 446000), 'port1': 7050, 'port2': 8443, 'url1': 'orderer2.cluster.microgrid:7050', 'url2': 'orderer2.cluster.microgrid:8443', 'ip': '10.106.93.136'}[0m
+[32m2021-05-05 17:21:06,661 INFO config.py lineno:149 Thread-40: {'name': 'orderer3', 'desc': 'node_orderer3', 'domain': 'orderer3.cluster.microgrid', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 32, 376000), 'port1': 7050, 'port2': 8443, 'url1': 'orderer3.cluster.microgrid:7050', 'url2': 'orderer3.cluster.microgrid:8443', 'ip': '10.110.48.161'}[0m
+[32m2021-05-05 17:21:06,877 INFO config.py lineno:149 Thread-40: {'name': 'orderer4', 'desc': 'node_orderer4', 'domain': 'orderer4.cluster.microgrid', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 38, 273000), 'port1': 7050, 'port2': 8443, 'url1': 'orderer4.cluster.microgrid:7050', 'url2': 'orderer4.cluster.microgrid:8443', 'ip': '10.110.69.38'}[0m
+[32m2021-05-05 17:21:07,096 INFO config.py lineno:149 Thread-40: {'name': 'orderer5', 'desc': 'node_orderer5', 'domain': 'orderer5.cluster.microgrid', 'create_time': datetime.datetime(2021, 5, 5, 16, 46, 44, 164000), 'port1': 7050, 'port2': 8443, 'url1': 'orderer5.cluster.microgrid:7050', 'url2': 'orderer5.cluster.microgrid:8443', 'ip': '10.110.211.170'}[0m
+[32m2021-05-05 17:21:07,273 INFO config.py lineno:158 Thread-40: Copy config to data done.[0m
+[32m2021-05-05 17:21:07,276 INFO deployment.py lineno:98 Thread-40: Generate orderer deployment...[0m
+[32m2021-05-05 17:21:07,302 INFO deployment.py lineno:123 Thread-40: Generate orderer deployment done.[0m
+[32m2021-05-05 17:21:37,833 INFO deployment.py lineno:98 Thread-40: Generate orderer deployment...[0m
+[32m2021-05-05 17:21:37,858 INFO deployment.py lineno:123 Thread-40: Generate orderer deployment done.[0m
+[32m2021-05-05 17:21:54,704 INFO deployment.py lineno:98 Thread-40: Generate orderer deployment...[0m
+[32m2021-05-05 17:21:54,721 INFO deployment.py lineno:123 Thread-40: Generate orderer deployment done.[0m
+[32m2021-05-05 17:22:05,272 INFO deployment.py lineno:98 Thread-40: Generate orderer deployment...[0m
+[32m2021-05-05 17:22:05,301 INFO deployment.py lineno:123 Thread-40: Generate orderer deployment done.[0m
+[31m2021-05-05 17:22:10,030 ERROR kubernetes_cluster.py lineno:279 Thread-41: cluster: the cluster is not created.[0m
+[32m2021-05-05 17:22:13,510 INFO deployment.py lineno:98 Thread-40: Generate orderer deployment...[0m
+[32m2021-05-05 17:22:13,533 INFO deployment.py lineno:123 Thread-40: Generate orderer deployment done.[0m
+[32m2021-05-05 17:22:23,365 INFO channel.py lineno:29 Thread-40: Check consensus service...[0m
+[32m2021-05-05 17:22:23,366 INFO channel.py lineno:14 Thread-40: get available node...[0m
+[32m2021-05-05 17:22:23,370 INFO detect_service.py lineno:18 Thread-40: ip:10.105.16.133 port:7050 result:0[0m
+[32m2021-05-05 17:22:23,372 INFO channel.py lineno:25 Thread-40: get available node done.[0m
+[32m2021-05-05 17:22:23,372 INFO excute_command.py lineno:36 Thread-40: ['bash', 'conduit/scripts/check-consensus.sh', 'cluster', 'orderer1.cluster.microgrid:7050', 'cluster.microgrid', 'Orderer', 'systemchannel'][0m
+[32m2021-05-05 17:22:26,749 INFO excute_command.py lineno:39 Thread-40:  2021-05-05 17-22-23.642 [0;34mCheck consensus...[0m
+ 2021-05-05 17-22-26.745 [0;34mConsensus is ready[0m
+[0m
+[32m2021-05-05 17:22:26,750 INFO channel.py lineno:38 Thread-40: Check consensus service done.[0m
+[32m2021-05-05 17:25:29,009 INFO config.py lineno:12 Thread-42: ['Consumer', 'Producer'][0m
+[32m2021-05-05 17:25:29,016 INFO models.py lineno:73 Thread-42: {'name': 'cluster', 'domain': 'cluster.microgrid', 'desc': 'desc', 'consensus': 'raft'}[0m
+[32m2021-05-05 17:25:29,062 INFO config.py lineno:69 Thread-42: Generate configtx.yaml for conandpro done.[0m
+[32m2021-05-05 17:25:29,062 INFO config.py lineno:113 Thread-42: Generate generate conandpro.tx...[0m
+[32m2021-05-05 17:25:29,063 INFO excute_command.py lineno:46 Thread-42: ['bash', 'conduit/scripts/generate-channel-tx.sh', 'cluster', 'conandpro'][0m
+[32m2021-05-05 17:25:29,336 INFO excute_command.py lineno:49 Thread-42: stdout:
+
+#################################################################
+### Generating channel configuration transaction 'channel.tx' ###
+#################################################################
+[0m
+[32m2021-05-05 17:25:29,337 INFO config.py lineno:116 Thread-42: Generate conandpro.tx done.[0m
+[32m2021-05-05 17:25:29,339 INFO channel.py lineno:41 Thread-42: request orderer to create channel:conandpro...[0m
+[32m2021-05-05 17:25:29,339 INFO channel.py lineno:14 Thread-42: get available node...[0m
+[32m2021-05-05 17:25:29,340 INFO detect_service.py lineno:18 Thread-42: ip:10.105.16.133 port:7050 result:0[0m
+[32m2021-05-05 17:25:29,340 INFO channel.py lineno:25 Thread-42: get available node done.[0m
+[32m2021-05-05 17:25:29,340 INFO excute_command.py lineno:25 Thread-42: ['bash', 'conduit/scripts/fetch-channel.sh', 'cluster', 'conandpro', 'orderer1.cluster.microgrid:7050', 'Orderer', 'cluster.microgrid'][0m
+[32m2021-05-05 17:25:29,474 INFO excute_command.py lineno:29 Thread-42: [0m
+[32m2021-05-05 17:25:29,475 INFO excute_command.py lineno:46 Thread-42: ['bash', 'conduit/scripts/create-channel.sh', 'cluster', 'conandpro', 'orderer1.cluster.microgrid:7050', 'Consumer', 'cluster.microgrid'][0m
+[32m2021-05-05 17:25:31,000 INFO excute_command.py lineno:49 Thread-42: stdout:
+ 2021-05-05 17-25-30.996 [0;34mcreate channel:conandpro success.[0m
+[0m
+[32m2021-05-05 17:25:31,002 INFO channel.py lineno:49 Thread-42: create channel:conandpro done.[0m
+[32m2021-05-05 17:26:06,281 INFO channel.py lineno:54 Thread-44: org:Consumer peer:consumer1 to join channel:conandpro...[0m
+[32m2021-05-05 17:26:06,282 INFO channel.py lineno:14 Thread-44: get available node...[0m
+[32m2021-05-05 17:26:06,282 INFO detect_service.py lineno:18 Thread-44: ip:10.105.16.133 port:7050 result:0[0m
+[32m2021-05-05 17:26:06,283 INFO channel.py lineno:25 Thread-44: get available node done.[0m
+[32m2021-05-05 17:26:06,284 INFO excute_command.py lineno:46 Thread-44: ['bash', 'conduit/scripts/peer-join-channel.sh', 'cluster', 'conandpro', 'orderer1.cluster.microgrid:7050', 'Orderer', 'cluster.microgrid', 'Consumer', 'consumer1', 'consumer1.consumer.cluster.microgrid:7051'][0m
+[32m2021-05-05 17:26:07,192 INFO excute_command.py lineno:49 Thread-44: stdout:
+ 2021-05-05 17-26-07.189 [0;34mconsumer1 join conandpro done.[0m
+[0m
+[32m2021-05-05 17:26:07,193 INFO channel.py lineno:58 Thread-44: org:Consumer peer:consumer1 to join channel:conandpro done.[0m
+[32m2021-05-05 17:26:12,256 INFO channel.py lineno:54 Thread-45: org:Consumer peer:consumer2 to join channel:conandpro...[0m
+[32m2021-05-05 17:26:12,256 INFO channel.py lineno:14 Thread-45: get available node...[0m
+[32m2021-05-05 17:26:12,257 INFO detect_service.py lineno:18 Thread-45: ip:10.105.16.133 port:7050 result:0[0m
+[32m2021-05-05 17:26:12,257 INFO channel.py lineno:25 Thread-45: get available node done.[0m
+[32m2021-05-05 17:26:12,257 INFO excute_command.py lineno:46 Thread-45: ['bash', 'conduit/scripts/peer-join-channel.sh', 'cluster', 'conandpro', 'orderer1.cluster.microgrid:7050', 'Orderer', 'cluster.microgrid', 'Consumer', 'consumer2', 'consumer2.consumer.cluster.microgrid:7051'][0m
+[32m2021-05-05 17:26:12,865 INFO excute_command.py lineno:49 Thread-45: stdout:
+ 2021-05-05 17-26-12.864 [0;34mconsumer2 join conandpro done.[0m
+[0m
+[32m2021-05-05 17:26:12,865 INFO channel.py lineno:58 Thread-45: org:Consumer peer:consumer2 to join channel:conandpro done.[0m
+[32m2021-05-05 17:26:17,890 INFO channel.py lineno:54 Thread-46: org:Producer peer:producer1 to join channel:conandpro...[0m
+[32m2021-05-05 17:26:17,891 INFO channel.py lineno:14 Thread-46: get available node...[0m
+[32m2021-05-05 17:26:17,891 INFO detect_service.py lineno:18 Thread-46: ip:10.105.16.133 port:7050 result:0[0m
+[32m2021-05-05 17:26:17,891 INFO channel.py lineno:25 Thread-46: get available node done.[0m
+[32m2021-05-05 17:26:17,891 INFO excute_command.py lineno:46 Thread-46: ['bash', 'conduit/scripts/peer-join-channel.sh', 'cluster', 'conandpro', 'orderer1.cluster.microgrid:7050', 'Orderer', 'cluster.microgrid', 'Producer', 'producer1', 'producer1.producer.cluster.microgrid:7051'][0m
+[32m2021-05-05 17:26:18,369 INFO excute_command.py lineno:49 Thread-46: stdout:
+ 2021-05-05 17-26-18.367 [0;34mproducer1 join conandpro done.[0m
+[0m
+[32m2021-05-05 17:26:18,370 INFO channel.py lineno:58 Thread-46: org:Producer peer:producer1 to join channel:conandpro done.[0m
+[32m2021-05-05 17:26:23,408 INFO channel.py lineno:54 Thread-47: org:Producer peer:producer2 to join channel:conandpro...[0m
+[32m2021-05-05 17:26:23,408 INFO channel.py lineno:14 Thread-47: get available node...[0m
+[32m2021-05-05 17:26:23,408 INFO detect_service.py lineno:18 Thread-47: ip:10.105.16.133 port:7050 result:0[0m
+[32m2021-05-05 17:26:23,409 INFO channel.py lineno:25 Thread-47: get available node done.[0m
+[32m2021-05-05 17:26:23,409 INFO excute_command.py lineno:46 Thread-47: ['bash', 'conduit/scripts/peer-join-channel.sh', 'cluster', 'conandpro', 'orderer1.cluster.microgrid:7050', 'Orderer', 'cluster.microgrid', 'Producer', 'producer2', 'producer2.producer.cluster.microgrid:7051'][0m
+[32m2021-05-05 17:26:24,262 INFO excute_command.py lineno:49 Thread-47: stdout:
+ 2021-05-05 17-26-24.261 [0;34mproducer2 join conandpro done.[0m
+[0m
+[32m2021-05-05 17:26:24,263 INFO channel.py lineno:58 Thread-47: org:Producer peer:producer2 to join channel:conandpro done.[0m
+[32m2021-05-05 17:26:29,409 INFO channel.py lineno:94 Thread-48: update channel:clusterorg:Consumeranchor peer:consumer1...[0m
+[32m2021-05-05 17:26:29,409 INFO channel.py lineno:14 Thread-48: get available node...[0m
+[32m2021-05-05 17:26:29,409 INFO detect_service.py lineno:18 Thread-48: ip:10.105.16.133 port:7050 result:0[0m
+[32m2021-05-05 17:26:29,410 INFO channel.py lineno:25 Thread-48: get available node done.[0m
+[32m2021-05-05 17:26:29,410 INFO config.py lineno:88 Thread-48: Generate channel org anchor json file...[0m
+[32m2021-05-05 17:26:29,431 INFO config.py lineno:101 Thread-48: Generate channel org anchor json file done.[0m
+[32m2021-05-05 17:26:29,431 INFO excute_command.py lineno:46 Thread-48: ['bash', 'conduit/scripts/update-appchannel-anchor-peer.sh', 'cluster', 'conandpro', 'orderer1.cluster.microgrid:7050', 'Orderer', 'cluster.microgrid', 'Consumer', 'consumer1.consumer.cluster.microgrid'][0m
+[32m2021-05-05 17:26:31,076 INFO excute_command.py lineno:49 Thread-48: stdout:
+[0m
+[32m2021-05-05 17:26:31,076 INFO channel.py lineno:99 Thread-48: update channel:clusterorg:Consumeranchor peer:consumer1 done.[0m
+[32m2021-05-05 17:26:36,111 INFO channel.py lineno:94 Thread-49: update channel:clusterorg:Produceranchor peer:producer1...[0m
+[32m2021-05-05 17:26:36,111 INFO channel.py lineno:14 Thread-49: get available node...[0m
+[32m2021-05-05 17:26:36,111 INFO detect_service.py lineno:18 Thread-49: ip:10.105.16.133 port:7050 result:0[0m
+[32m2021-05-05 17:26:36,111 INFO channel.py lineno:25 Thread-49: get available node done.[0m
+[32m2021-05-05 17:26:36,111 INFO config.py lineno:88 Thread-49: Generate channel org anchor json file...[0m
+[32m2021-05-05 17:26:36,124 INFO config.py lineno:101 Thread-49: Generate channel org anchor json file done.[0m
+[32m2021-05-05 17:26:36,124 INFO excute_command.py lineno:46 Thread-49: ['bash', 'conduit/scripts/update-appchannel-anchor-peer.sh', 'cluster', 'conandpro', 'orderer1.cluster.microgrid:7050', 'Orderer', 'cluster.microgrid', 'Producer', 'producer1.producer.cluster.microgrid'][0m
+[32m2021-05-05 17:26:37,310 INFO excute_command.py lineno:49 Thread-49: stdout:
+[0m
+[32m2021-05-05 17:26:37,310 INFO channel.py lineno:99 Thread-49: update channel:clusterorg:Produceranchor peer:producer1 done.[0m

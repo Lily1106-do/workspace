@@ -1,0 +1,7 @@
+peer chaincode install -p ./ -n concc -v 0 
+peer chaincode instantiate -n concc -v 0 -c '{"Args":["init"]}' -C myc
+peer chaincode invoke -n concc -c '{"Args":["addUser"]}' -C myc
+peer chaincode invoke -n concc -c '{"Args":["setAsset","000001","100"]}' -C myc
+
+
+

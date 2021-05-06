@@ -1,0 +1,107 @@
+# pvc template
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: microgrid-cluster-consumer-rootca-consumer
+  namespace: microgrid-cluster-consumer
+spec:
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: microgrid-cluster-consumer
+    name: microgrid-cluster-consumer-rootca-consumer
+  nfs:
+    server: 192.168.136.131
+    path: /opt/share/microgrid/cluster/hlledger/Consumer/rootca-consumer
+
+# pvc template
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: microgrid-cluster-consumer-rootca-consumer
+  namespace: microgrid-cluster-consumer
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 100Mi
+
+# ca deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: microgrid-cluster-consumer
+  name: rootca-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      namespace: microgrid-cluster-consumer
+      app: hlledger
+      role: ca
+      ca-name: rootca-consumer
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        namespace: microgrid-cluster-consumer
+        app: hlledger
+        role: ca
+        ca-name: rootca-consumer
+    spec:
+      imagePullSecrets:
+      - name: dockerhub-token
+      containers:
+      - name: rootca-consumer
+        image: registry.cn-hangzhou.aliyuncs.com/timechainer/hyperledger/fabric-ca:1.4.8
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - fabric-ca-server start -b admin:adminpw
+        env:
+        - name: TZ
+          value: "Asia/Shanghai"
+        - name: FABRIC_CA_SERVER_CA_NAME
+          value: "rootca-consumer"
+        ports:
+        - containerPort: 7054
+        volumeMounts:
+        - name: ca-data
+          mountPath: "/etc/hyperledger/fabric-ca-server"
+      volumes:
+      - name: ca-data
+        persistentVolumeClaim:
+          claimName: microgrid-cluster-consumer-rootca-consumer
+
+# ca service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rootca-consumer
+  namespace: microgrid-cluster-consumer
+  labels:
+    namespace: microgrid-cluster-consumer
+    app: hlledger
+    role: ca
+    ca-name: rootca-consumer
+spec:
+  selector:
+    namespace: microgrid-cluster-consumer
+    app: hlledger
+    role: ca
+    ca-name: rootca-consumer
+  # clusterIP: None
+  ports:
+  - name: listen
+    port: 7054
+    targetPort: 7054

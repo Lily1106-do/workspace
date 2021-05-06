@@ -1,0 +1,14 @@
+minikube{k8s 单机运行}: 
+yardman: mongo、 yardman-api、 yardman-nginx
+NFS
+
+
+
+kubectl get pods -A
+
+minikube delete 
+./create-cluster.sh
+minikube ssh
+docker login registry.cn-hangzhou.aliyuncs.com
+timechainer Timechainer@2020
+

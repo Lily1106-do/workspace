@@ -1,0 +1,107 @@
+# pvc template
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: microgrid-cluster-orderer-rootca-orderer
+  namespace: microgrid-cluster-orderer
+spec:
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: microgrid-cluster-orderer
+    name: microgrid-cluster-orderer-rootca-orderer
+  nfs:
+    server: 192.168.136.131
+    path: /opt/share/microgrid/cluster/hlledger/Orderer/rootca-orderer
+
+# pvc template
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: microgrid-cluster-orderer-rootca-orderer
+  namespace: microgrid-cluster-orderer
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 100Mi
+
+# ca deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: microgrid-cluster-orderer
+  name: rootca-orderer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      namespace: microgrid-cluster-orderer
+      app: hlledger
+      role: ca
+      ca-name: rootca-orderer
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        namespace: microgrid-cluster-orderer
+        app: hlledger
+        role: ca
+        ca-name: rootca-orderer
+    spec:
+      imagePullSecrets:
+      - name: dockerhub-token
+      containers:
+      - name: rootca-orderer
+        image: registry.cn-hangzhou.aliyuncs.com/timechainer/hyperledger/fabric-ca:1.4.8
+        imagePullPolicy: IfNotPresent
+        command:
+        - /bin/bash
+        - -c
+        - fabric-ca-server start -b admin:adminpw
+        env:
+        - name: TZ
+          value: "Asia/Shanghai"
+        - name: FABRIC_CA_SERVER_CA_NAME
+          value: "rootca-orderer"
+        ports:
+        - containerPort: 7054
+        volumeMounts:
+        - name: ca-data
+          mountPath: "/etc/hyperledger/fabric-ca-server"
+      volumes:
+      - name: ca-data
+        persistentVolumeClaim:
+          claimName: microgrid-cluster-orderer-rootca-orderer
+
+# ca service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rootca-orderer
+  namespace: microgrid-cluster-orderer
+  labels:
+    namespace: microgrid-cluster-orderer
+    app: hlledger
+    role: ca
+    ca-name: rootca-orderer
+spec:
+  selector:
+    namespace: microgrid-cluster-orderer
+    app: hlledger
+    role: ca
+    ca-name: rootca-orderer
+  # clusterIP: None
+  ports:
+  - name: listen
+    port: 7054
+    targetPort: 7054

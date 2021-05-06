@@ -1,0 +1,12 @@
+{
+  "mod_policy": "Admins",
+  "value": {
+    "anchor_peers": [
+      {
+        "host": "consumer1.consumer.cluster.microgrid",
+        "port": 7051
+      }
+    ]
+  },
+  "version": "0"
+}
