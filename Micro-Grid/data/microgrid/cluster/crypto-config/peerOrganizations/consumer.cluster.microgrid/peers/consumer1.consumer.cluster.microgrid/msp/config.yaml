@@ -1,0 +1,14 @@
+NodeOUs:
+  Enable: true
+  ClientOUIdentifier:
+    Certificate: cacerts/ca.consumer.cluster.microgrid-cert.pem
+    OrganizationalUnitIdentifier: client
+  PeerOUIdentifier:
+    Certificate: cacerts/ca.consumer.cluster.microgrid-cert.pem
+    OrganizationalUnitIdentifier: peer
+  AdminOUIdentifier:
+    Certificate: cacerts/ca.consumer.cluster.microgrid-cert.pem
+    OrganizationalUnitIdentifier: admin
+  OrdererOUIdentifier:
+    Certificate: cacerts/ca.consumer.cluster.microgrid-cert.pem
+    OrganizationalUnitIdentifier: orderer

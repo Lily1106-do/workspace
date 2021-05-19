@@ -1,0 +1,125 @@
+# namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: conandpro-cli
+
+# mychannel cli pv 
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: conandpro-cli
+  namespace: conandpro-cli
+spec:
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.136.140
+    path: "/opt/share/microgrid/cluster/crypto-config"
+
+# mychannel cli pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: conandpro-cli
+  namespace: conandpro-cli
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 100Mi
+
+# dockerhub token
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: conandpro-cli
+  name: dockerhub-token
+data:
+  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJyZWdpc3RyeS5jbi1oYW5nemhvdS5hbGl5dW5jcy5jb20iOiB7CgkJCSJhdXRoIjogImRHbHRaV05vWVdsdVpYSTZWR2x0WldOb1lXbHVaWEpBTWpBeU1BPT0iCgkJfQoJfSwKCSJIdHRwSGVhZGVycyI6IHsKCQkiVXNlci1BZ2VudCI6ICJEb2NrZXItQ2xpZW50LzE5LjAzLjEzIChsaW51eCkiCgl9Cn0=
+type: kubernetes.io/dockerconfigjson
+
+# mychannel deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: conandpro-cli
+  name: conandpro-cli
+  labels:
+    app: mychannel
+    role: conandpro-cli
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mychannel
+      role: conandpro-cli
+  template:
+    metadata:
+      labels:
+        app: mychannel
+        role: conandpro-cli
+    spec:
+      imagePullSecrets:
+      - name: dockerhub-token
+      containers:
+      - name: cli
+        image: registry.cn-hangzhou.aliyuncs.com/timechainer/hyperledger/fabric-tools:1.4.8
+        workingDir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+        env:
+        - name: GOPATH
+          value: "/opt/gopath"
+        - name: GODEBUG
+          value: "go"
+        - name: FABRIC_LOGGING_SPEC
+          value: "info"
+        - name: CORE_PEER_ID
+          value: "cli"
+        - name: CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE
+          value: "bridge"
+        - name: CORE_PEER_ADDRESS
+          value: "consumer1.consumer.cluster.microgrid:7051"
+        - name: CORE_PEER_LOCALMSPID
+          value: "ConsumerMSP"
+        - name: CORE_PEER_LOCALMSPTYPE
+          value: "bccsp"
+        - name: CORE_PEER_TLS_ENABLED
+          value: "true"
+        - name: CORE_PEER_TLS_CERT_FILE
+          value: "/opt/gopath/src/github.com/hyperledger/fabric/crypto-config/peerOrganizations/consumer.cluster.microgrid/users/Admin@consumer.cluster.microgrid/tls/client.crt"
+        - name: CORE_PEER_TLS_KEY_FILE
+          value: "/opt/gopath/src/github.com/hyperledger/fabric/crypto-config/peerOrganizations/consumer.cluster.microgrid/users/Admin@consumer.cluster.microgrid/tls/client.key"
+        - name: CORE_PEER_TLS_ROOTCERT_FILE
+          value: "/opt/gopath/src/github.com/hyperledger/fabric/crypto-config/peerOrganizations/consumer.cluster.microgrid/users/Admin@consumer.cluster.microgrid/tls/ca.crt"
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: "/opt/gopath/src/github.com/hyperledger/fabric/crypto-config/peerOrganizations/consumer.cluster.microgrid/users/Admin@consumer.cluster.microgrid/msp"
+        command:
+        - /bin/bash
+        - -c
+        - sleep 360000
+        volumeMounts:
+          - name: storage
+            mountPath: "/opt/gopath/src/github.com/hyperledger/fabric/crypto-config"
+          - name: chaincode
+            mountPath: "/opt/gopath/src/github.com/hyperledger/fabric/chaincode"
+          - name: scripts
+            mountPath: "/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts"
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: conandpro-cli
+      - name: chaincode
+        hostPath:
+          path: "/root/yardman/tests/chaincode"
+      - name: scripts
+        hostPath:
+          path: "/root/yardman/tests/k8s/mychannel/scripts"

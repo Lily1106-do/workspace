@@ -1,1 +1,1 @@
-kubectl delete -f mychannel-deployment.yaml
+kubectl delete -f conandpro-deployment.yaml

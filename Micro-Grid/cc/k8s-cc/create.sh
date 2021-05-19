@@ -1,1 +1,1 @@
-kubectl create -f mychannel-deployment.yaml
+kubectl create -f conandpro-deployment.yaml

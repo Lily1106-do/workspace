@@ -22,7 +22,7 @@ spec:
     namespace: microgrid
     name: microgrid
   nfs:
-    server: "192.168.136.131"
+    server: "192.168.136.140"
     path: "/opt/share"
 
 # yardman config
@@ -34,7 +34,7 @@ metadata:
   namespace: microgrid
 data:
   # nfs config
-  NFS_HOST: "192.168.136.131"
+  NFS_HOST: "192.168.136.140"
   NFS_ROOT_DIR: "/opt/share"
 
   # yardman name config

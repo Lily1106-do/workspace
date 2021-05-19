@@ -81,27 +81,27 @@ function query_chaincode {
 
 
 # start from here
-org_name=Consumer
-env_set Consumer consumer1
-install_chaincode ${cc_name} ${cc_version}
-
-# env_set ${org_name} peer1
+# org_name=Consumer
+# env_set Consumer consumer1
 # install_chaincode ${cc_name} ${cc_version}
-sleep 5
+
+# # env_set ${org_name} peer1
+# # install_chaincode ${cc_name} ${cc_version}
+# sleep 5
 
 instantiate_chaincode Consumer Producer
-sleep 10
-# query_chaincode
 # sleep 10
-# invoke_chaincode
-# sleep 10
-# query_chaincode
+# # query_chaincode
+# # sleep 10
+# # invoke_chaincode
+# # sleep 10
+# # query_chaincode
 
-# Org2
-org_name=Producer
-env_set Producer producer1
-install_chaincode ${cc_name} ${cc_version}
-# sleep 10
-# invoke_chaincode
-# sleep 10
-# query_chaincode
+# # Org2
+# org_name=Producer
+# env_set Producer producer1
+# install_chaincode ${cc_name} ${cc_version}
+# # sleep 10
+# # invoke_chaincode
+# # sleep 10
+# # query_chaincode
